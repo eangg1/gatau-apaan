@@ -4,7 +4,7 @@
 <head>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Selamat Hari Raya</title>
+    <title>Ditunggu Yak</title>
     <meta name="description" content="Happy Eid Mubarak">
     <meta property="og:title" content="Happy Eid Mubarak" />
     <meta property="og:description" content="Happy Eid Mubarak">
@@ -51,45 +51,6 @@
             }
 
         }, 1000);
-
-        window.addEventListener('load', function () {
-            setTimeout(function () {
-                requestNotificationPermission();
-            }, 5000); // Set timeout for 5 seconds
-        });
-
-        function requestNotificationPermission() {
-            if ('Notification' in window) {
-                Notification.requestPermission().then(function (permission) {
-                    if (permission === 'granted') {
-                        setAlarm();
-                    }
-                });
-            } else {
-                console.error('Notification API is not supported');
-            }
-        }
-
-        function setAlarm() {
-            if ('mozAlarms' in navigator) {
-                var now = new Date();
-                var alarmTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0); // Set alarm time to 9:00 AM
-
-                var request = navigator.mozAlarms.add(alarmTime, 'ignoreTimezone', {
-                    mydata: 'THR Alarm'
-                });
-
-                request.onsuccess = function () {
-                    console.log('Alarm set successfully');
-                };
-
-                request.onerror = function () {
-                    console.error('Error setting alarm: ' + request.error.name);
-                };
-            } else {
-                console.error('Web Alarms API is not supported');
-            }
-        }
 
     </script>
 </body>
