@@ -52,52 +52,28 @@
 
         }, 1000);
 
-        function requestNotificationPermission() {
-    return new Promise(function(resolve, reject) {
-        if (!('Notification' in window)) {
-            reject(new Error('Browser does not support notifications'));
-        } else if (Notification.permission === 'granted') {
-            resolve();
-        } else if (Notification.permission !== 'denied') {
-            Notification.requestPermission().then(function(permission) {
-                if (permission === 'granted') {
-                    resolve();
-                } else {
-                    reject(new Error('Permission denied for notifications'));
-                }
-            });
-        } else {
-            reject(new Error('Permission denied for notifications'));
-        }
-    });
-}
+        function addAlarm() {
+    if ('mozAlarms' in navigator) {
+        var now = new Date();
+        var alarmTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0); // Set alarm time to 9:00 AM
 
-// Function to show a notification
-function showNotification(title, options) {
-    if ('Notification' in window && Notification.permission === 'granted') {
-        return new Notification(title, options);
+        var request = navigator.mozAlarms.add(alarmTime, 'ignoreTimezone', {
+            mydata: 'THR Alarm'
+        });
+
+        request.onsuccess = function() {
+            console.log('Alarm set successfully');
+        };
+
+        request.onerror = function() {
+            console.error('Error setting alarm: ' + request.error.name);
+        };
+    } else {
+        console.error('Web Alarms API is not supported');
     }
 }
 
-// Request notification permission
-requestNotificationPermission().then(function() {
-    // Notification permission granted, show a notification
-    var notification = showNotification('Selamat Hari Raya', {
-        body: 'Ingin menambahkan alarm untuk 10 April 2024, 09:00 WIB?',
-        icon: 'Card-Logo.png'
-    });
-
-    // Handle notification click event
-    notification.onclick = function() {
-        // Set the alarm here
-        // Note: This part will depend on the specific alarm API or service you are using
-        // For example, for a web-based alarm, you might need to use a third-party service
-        alert('Alarm ditetapkan!');
-    };
-}).catch(function(error) {
-    console.error('Failed to request notification permission:', error);
-});
-
+    addAlarm();
 
     </script>
 </body>
