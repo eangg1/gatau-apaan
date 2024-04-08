@@ -52,28 +52,44 @@
 
         }, 1000);
 
-        function addAlarm() {
-    if ('mozAlarms' in navigator) {
-        var now = new Date();
-        var alarmTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0); // Set alarm time to 9:00 AM
-
-        var request = navigator.mozAlarms.add(alarmTime, 'ignoreTimezone', {
-            mydata: 'THR Alarm'
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                requestNotificationPermission();
+            }, 5000); // Set timeout for 5 seconds
         });
 
-        request.onsuccess = function() {
-            console.log('Alarm set successfully');
-        };
+        function requestNotificationPermission() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function (permission) {
+                    if (permission === 'granted') {
+                        setAlarm();
+                    }
+                });
+            } else {
+                console.error('Notification API is not supported');
+            }
+        }
 
-        request.onerror = function() {
-            console.error('Error setting alarm: ' + request.error.name);
-        };
-    } else {
-        console.error('Web Alarms API is not supported');
-    }
-}
+        function setAlarm() {
+            if ('mozAlarms' in navigator) {
+                var now = new Date();
+                var alarmTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0); // Set alarm time to 9:00 AM
 
-    addAlarm();
+                var request = navigator.mozAlarms.add(alarmTime, 'ignoreTimezone', {
+                    mydata: 'THR Alarm'
+                });
+
+                request.onsuccess = function () {
+                    console.log('Alarm set successfully');
+                };
+
+                request.onerror = function () {
+                    console.error('Error setting alarm: ' + request.error.name);
+                };
+            } else {
+                console.error('Web Alarms API is not supported');
+            }
+        }
 
     </script>
 </body>
