@@ -52,27 +52,52 @@
 
         }, 1000);
 
-        // Check if the browser supports the Notification API
-if ('Notification' in window) {
-    // Request permission to show notifications
-    Notification.requestPermission().then(function (result) {
-        if (result === 'granted') {
-            // Create a new notification
-            var notification = new Notification('Selamat Hari Raya', {
-                body: 'Ingin menambahkan alarm untuk 10 April 2024, 09:00 WIB?',
-                icon: 'Card-Logo.png'
+        function requestNotificationPermission() {
+    return new Promise(function(resolve, reject) {
+        if (!('Notification' in window)) {
+            reject(new Error('Browser does not support notifications'));
+        } else if (Notification.permission === 'granted') {
+            resolve();
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(function(permission) {
+                if (permission === 'granted') {
+                    resolve();
+                } else {
+                    reject(new Error('Permission denied for notifications'));
+                }
             });
-
-            // Handle the user's response to the notification
-            notification.onclick = function () {
-                // Set the alarm here
-                // Note: This part will depend on the specific alarm API or service you are using
-                // For example, for a web-based alarm, you might need to use a third-party service
-                alert('Alarm ditetapkan!');
-            };
+        } else {
+            reject(new Error('Permission denied for notifications'));
         }
     });
 }
+
+// Function to show a notification
+function showNotification(title, options) {
+    if ('Notification' in window && Notification.permission === 'granted') {
+        return new Notification(title, options);
+    }
+}
+
+// Request notification permission
+requestNotificationPermission().then(function() {
+    // Notification permission granted, show a notification
+    var notification = showNotification('Selamat Hari Raya', {
+        body: 'Ingin menambahkan alarm untuk 10 April 2024, 09:00 WIB?',
+        icon: 'Card-Logo.png'
+    });
+
+    // Handle notification click event
+    notification.onclick = function() {
+        // Set the alarm here
+        // Note: This part will depend on the specific alarm API or service you are using
+        // For example, for a web-based alarm, you might need to use a third-party service
+        alert('Alarm ditetapkan!');
+    };
+}).catch(function(error) {
+    console.error('Failed to request notification permission:', error);
+});
+
 
     </script>
 </body>
