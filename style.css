@@ -347,6 +347,7 @@
     border-radius: 8px; 
   }
 
+
   .countdown-box {
     position: absolute;
     left: 50%;
@@ -356,8 +357,8 @@
     background:
       /*rgb(46, 196, 255)*/
       rgb(255, 255, 255);
-    width: 450px;
-    height: 100px;
+    width: 400px;
+    height: 250px;
     border-radius: 10px;
     box-shadow: 7px 10px 16px -7px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 7px 10px 16px -7px rgba(0, 0, 0, 0.75);
@@ -365,7 +366,13 @@
     font-size: 30px;
     text-align: center;
     padding-top: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
+
+  .body .countdown-box {
+    font-size: 20px;
+  }
   
   @media screen and (max-width: 768px) {
     .box {
