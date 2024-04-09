@@ -65,7 +65,7 @@
       /*rgb(46, 196, 255)*/
       rgb(255, 255, 255);
     width: 300px;
-    height: 380px;
+    height: 400px;
     border-radius: 10px;
     box-shadow: 7px 10px 16px -7px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 7px 10px 16px -7px rgba(0, 0, 0, 0.75);
@@ -339,6 +339,7 @@
     top: -100%;
     left: -100%;
   }
+
 
   .qr-code{
     width: 90px; 
