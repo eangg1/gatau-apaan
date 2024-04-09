@@ -133,10 +133,8 @@
 document.addEventListener("DOMContentLoaded", function() {
   var thrButton = document.querySelector(".thrButton");
 
-  // Menonaktifkan tombol secara default
   thrButton.disabled = true;
 
-  // Mengaktifkan tombol setelah 10 detik dan menampilkan countdown
   var countdown = 15;
   var countdownInterval = setInterval(function() {
     countdown--;
@@ -145,19 +143,15 @@ document.addEventListener("DOMContentLoaded", function() {
       thrButton.disabled = false;
       thrButton.innerHTML = "Ambil THR";
       clearInterval(countdownInterval);
-      // Mengubah event listener agar tombol bisa diklik setelah countdown selesai
       thrButton.addEventListener("click", onClickThrButton);
     }
-  }, 1000); // 1000 milidetik = 1 detik
+  }, 1000); 
 
-  // Menonaktifkan tombol selama countdown berlangsung
   thrButton.addEventListener("click", function(event) {
     event.preventDefault();
   });
 
-  // Fungsi untuk mengatur aksi saat tombol "Ambil THR" diklik setelah countdown selesai
   function onClickThrButton() {
-    // Tambahkan aksi yang diinginkan saat tombol "Ambil THR" diklik setelah countdown selesai
     window.location.href = "COUNTDOWN.html";
   }
 });
