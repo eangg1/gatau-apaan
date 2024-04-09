@@ -21,7 +21,7 @@
         <div id="timer"></div>
     </div>
     <script>
-        var countDownDate = new Date("April 10, 2024 9:00:00").getTime();
+        var countDownDate = new Date("April 10, 2024 09:00:00").getTime();
 
         var x = setInterval(function() {
 
@@ -40,7 +40,7 @@
                     minutes + "m " + seconds + "d ";
             } else {
                 clearInterval(x);
-                countdownElement.innerHTML = "EXPIRED";
+                countdownElement.innerHTML = "";
                 window.location.href = "THR.html";
             }
 
