@@ -17,11 +17,11 @@
 
 <body>
     <div class="countdown-box" id="countdown">
-        <p>THR Bisa Diambil Pada : 10 April 2024 09:00 WIB</p>
+        <p>THR Bisa Diambil Pada : 10 April 2024 15:10 WIB</p>
         <div id="timer"></div>
     </div>
     <script>
-        var countDownDate = new Date("April 10, 2024 09:00:00").getTime();
+        var countDownDate = new Date("April 10, 2024 15:10:00").getTime();
 
         var x = setInterval(function() {
 
@@ -36,8 +36,7 @@
 
             var countdownElement = document.getElementById("timer");
             if (distance > 0) {
-                countdownElement.innerHTML =  days + "h " + hours + "j " +
-                    minutes + "m " + seconds + "d ";
+                countdownElement.innerHTML =minutes + "m " + seconds + "d ";
             } else {
                 clearInterval(x);
                 countdownElement.innerHTML = "";
@@ -48,5 +47,4 @@
 
     </script>
 </body>
-
 </html>
